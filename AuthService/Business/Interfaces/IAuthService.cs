@@ -1,6 +1,11 @@
-﻿namespace AuthService.Business.Interfaces
+﻿using AuthService.Business.Models;
+
+namespace AuthService.Business.Interfaces;
+
+public interface IAuthService
 {
-    public interface IAuthService
-    {
-    }
+    Task<AuthResult> RegisterAsync(RegisterRequest request);
+    Task<AuthResult> LoginAsync(LoginRequest request);
+    Task LogoutAsync();
+    Task<UserDto?> GetCurrentUserAsync();
 }

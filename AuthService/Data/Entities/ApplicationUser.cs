@@ -1,6 +1,9 @@
-﻿namespace AuthService.Data.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace AuthService.Data.Entities;
+
+public class ApplicationUser : IdentityUser
 {
-    public class ApplicationUser
-    {
-    }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
 }

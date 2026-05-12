@@ -1,6 +1,13 @@
-﻿namespace AuthService.Business.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AuthService.Business.Models;
+
+public class LoginRequest
 {
-    public class LoginRequest
-    {
-    }
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; } = null!;
+
+    [Required]
+    public string Password { get; set; } = null!;
 }
