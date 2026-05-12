@@ -56,11 +56,7 @@ builder.Services.AddCors(options =>
         policy
             .WithOrigins(
                 "http://localhost:5173",
-                "https://localhost:5173",
-                "http://localhost:5174",
-                "https://localhost:5174",
-
-                "https://memoriesadmin-egehcjcjc9cmb4fv.swedencentral-01.azurewebsites.net"
+                "http://localhost:5174"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
