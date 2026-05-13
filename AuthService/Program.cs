@@ -57,7 +57,7 @@ builder.Services.AddCors(options =>
             .WithOrigins(
                 "http://localhost:5173",
                 "https://localhost:5173",
-                "https://lemon-bush-0a5087a03.7.azurestaticapps.net/login"
+                "https://lemon-bush-0a5087a03.7.azurestaticapps.net"
 
             )
             .AllowAnyHeader()
