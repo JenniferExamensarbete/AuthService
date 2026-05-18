@@ -56,7 +56,8 @@ builder.Services.AddCors(options =>
         policy
             .WithOrigins(
                 "http://localhost:5173",
-                "https://localhost:5173",
+                "https://localhost:5174",
+                "https://authservice-dmefe0b8adg2hvek.swedencentral-01.azurewebsites.net",
                 "https://lemon-bush-0a5087a03.7.azurestaticapps.net"
 
             )
@@ -80,6 +81,12 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseCors("Frontend");
+
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.None,
+    Secure = CookieSecurePolicy.Always
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
