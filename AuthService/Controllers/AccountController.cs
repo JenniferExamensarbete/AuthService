@@ -11,6 +11,7 @@ public class AccountController(IAuthService authService) : ControllerBase
 {
     private readonly IAuthService _authService = authService;
 
+    [Authorize (Roles = "Admin")]
     [HttpPost("signup")]
     public async Task<IActionResult> Signup(RegisterRequest request)
     {
