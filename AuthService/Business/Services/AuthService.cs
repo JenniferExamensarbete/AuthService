@@ -111,6 +111,47 @@ public class AuthService(
         return await CreateUserDtoAsync(user);
     }
 
+    public async Task<AuthResult> DeleteUserAsync(string authUserId)
+    {
+        var user = await _userManager.FindByIdAsync(authUserId);
+
+        if (user == null)
+        {
+            return new AuthResult
+            {
+                Success = false,
+                Error = "User not found."
+            };
+        }
+
+        var currentUserId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (currentUserId == authUserId)
+        {
+            return new AuthResult
+            {
+                Success = false,
+                Error = "You cannot delete your own admin account."
+            };
+        }
+
+        var result = await _userManager.DeleteAsync(user);
+
+        if (!result.Succeeded)
+        {
+            return new AuthResult
+            {
+                Success = false,
+                Error = string.Join(", ", result.Errors.Select(x => x.Description))
+            };
+        }
+
+        return new AuthResult
+        {
+            Success = true
+        };
+    }
+
     private async Task<UserDto> CreateUserDtoAsync(ApplicationUser user)
     {
         var roles = await _userManager.GetRolesAsync(user);
