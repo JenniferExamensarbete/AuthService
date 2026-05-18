@@ -11,7 +11,7 @@ public class AccountController(IAuthService authService) : ControllerBase
 {
     private readonly IAuthService _authService = authService;
 
-    [Authorize (Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [HttpPost("signup")]
     public async Task<IActionResult> Signup(RegisterRequest request)
     {
@@ -56,4 +56,16 @@ public class AccountController(IAuthService authService) : ControllerBase
             ? Unauthorized()
             : Ok(user);
     }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{authUserId}")]
+    public async Task<IActionResult> DeleteUser(string authUserId)
+    {
+        var result = await _authService.DeleteUserAsync(authUserId);
+
+        return result.Success
+            ? Ok(result)
+            : NotFound(result);
+    }
+
 }
