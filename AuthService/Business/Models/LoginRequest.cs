@@ -4,10 +4,10 @@ namespace AuthService.Business.Models;
 
 public class LoginRequest
 {
-    [Required]
-    [EmailAddress]
+    [Required(ErrorMessage = "Email krävs.")]
+    [EmailAddress(ErrorMessage = "Ange en giltig emailadress.")]
     public string Email { get; set; } = null!;
 
-    [Required]
+    [Required(ErrorMessage = "Lösenord krävs.")]
     public string Password { get; set; } = null!;
 }
